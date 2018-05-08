@@ -6,6 +6,7 @@ Thumbs.db
 npm-debug.log
 yarn-error.log
 node_modules/
+/storage
 
 # Intellij project files
 .idea

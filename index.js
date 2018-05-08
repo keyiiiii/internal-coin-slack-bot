@@ -3,7 +3,8 @@ const config = require('./config');
 const contract = require('./contract');
 
 const controller = Botkit.slackbot({
-　　debug: false
+  debug: false,
+  json_file_store: './storage'
 });
 
 controller.spawn({
