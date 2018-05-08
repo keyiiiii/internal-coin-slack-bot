@@ -5,6 +5,7 @@ const config = {
   BOT_TOKEN: process.env.BOT_TOKEN,
   PARENT_ADDRESS: process.env.PARENT_ADDRESS,
   BALANCE: 'https://ropsten.etherscan.io/token/0x8cf870f3045ab35fc2c142674325ad80e9b15c4d#balances',
+  SYMBOL: 'ITN',
 };
 
 module.exports = config;

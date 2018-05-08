@@ -1,6 +1,7 @@
 const Botkit = require('botkit');
 const config = require('./config');
 const contract = require('./contract');
+const math = require('./utils/math');
 
 const controller = Botkit.slackbot({
   debug: false,
@@ -46,7 +47,7 @@ send \`{message}\` to @{mention}
 \`\`\`
 show message
 \`\`\`
-- 残高確認（とりあえず Etherscan の URL 出しとく）
+- 残高確認
 \`\`\`
 balance
 \`\`\`
@@ -145,9 +146,17 @@ welcome
    * `balance`
    */
   controller.hears(['balance'], 'direct_message, direct_mention, mention', (bot, message) => {
-    controller.storage.users.all((err, allUserData) => {
-      // とりあえず Etherscan の URL 出しとく
-      bot.reply(message, config.BALANCE);
+    controller.storage.users.get(message.user, (getStorageErr, savedUserInfo) => {
+      if (!savedUserInfo) {
+        bot.reply(message, `<@${message.user}> まず、 \`add {address}\` で wallet（ropsten）アドレスを登録してください。`);
+        return;
+      }
+      contract.balanceOf(savedUserInfo.address)
+        .then((res) => {
+          const balance = `${math.toLocaleString(res / 1e18)} ${config.SYMBOL}`;
+          console.log('balance: ', balance);
+          bot.reply(message, balance);
+        });
     });
   });
 

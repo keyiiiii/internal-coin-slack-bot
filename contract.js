@@ -20,4 +20,8 @@ function thanks(address, message) {
   return contract.methods.thanks(address, message);
 }
 
-module.exports = { thanksMessage, thanks };
+function balanceOf(address) {
+  return contract.methods.balanceOf(address).call();
+}
+
+module.exports = { thanksMessage, thanks, balanceOf };
