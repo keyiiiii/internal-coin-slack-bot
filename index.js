@@ -99,7 +99,7 @@ welcome
       contract.thanksMessage(savedUserInfo.address)
         .then((res) => {
           console.log('thanksMessage: ', res);
-          bot.reply(message, `<@${message.user}> 直近のあなたへメッセージ: \`${res}\``);
+          bot.reply(message, `<@${message.user}> 直近のあなたへのメッセージ: \`${res}\``);
         });
     });
   });
